@@ -42,12 +42,13 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 	protected static final int RESULT_SPEECH = 1;
 	static Random rand = new Random();
 	static String sender;
+	Context context;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		context = getApplicationContext();
 		text = (EditText) this.findViewById(R.id.text);
 		listView = (ListView) this.findViewById(R.id.list);
 		searchBtn = (ImageButton) this.findViewById(R.id.searchBtn);
@@ -257,13 +258,13 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 
 	@Override
 	public void onError(Exception ex) {
-		Toast.makeText(getApplicationContext(), "Tôi không nghe thấy gì !", Toast.LENGTH_LONG).show();
+		makeToast("Tôi không nghe thấy gì !");
 		cancelProgress();
 	}
 
 	@Override
 	public void onTimeout() {
-		Toast.makeText(getApplicationContext(), "Tôi không nghe thấy gì !", Toast.LENGTH_LONG).show();
+		makeToast("Tôi không nghe thấy gì !");
 		cancelProgress();
 	}
 
@@ -272,6 +273,14 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 			@Override
 			public void run() {
 				addNewMessage(new Message(text,true), false);
+			}
+		});
+	}
+	private void makeToast(final String m){
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(context, m, Toast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -284,21 +293,30 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 
 	@Override
 	public void onResult(Result result) {
+		if (result != null) {
+			Alternative[] res = result.result.clone();
+			Transcript[] tra = res[0].alternative.clone();
+			String text = tra[0].transcript;
+			
+			if (text == null | text.equals("")) 
+				makeToast("Tôi không nghe thấy gì !");
+			setText(text);
+			
+			OnlineBot onlineBot = new OnlineBot(this);
+			onlineBot.setRequest(text);
+			onlineBot.execute();
+			cancelProgress();
+		} else {
+			setText("null");
+			//Toast.makeText(context, "Tôi không nghe thấy gì !", Toast.LENGTH_LONG).show();
+		}
+			
 		
-		Alternative[] res = result.result.clone();
-		Transcript[] tra = res[0].alternative.clone();
-		String text = tra[0].transcript;
-		setText(text);
-		
-		OnlineBot onlineBot = new OnlineBot(this);
-		onlineBot.setRequest(text);
-		onlineBot.execute();
-		cancelProgress();
 	}
 
 	@Override
 	public void onStopped() {
-		Toast.makeText(getApplicationContext(), "Tôi nghỉ đây !", Toast.LENGTH_LONG).show();
+		makeToast("Tôi nghỉ đây !");
 		cancelProgress();
 	}
 
