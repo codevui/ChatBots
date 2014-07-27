@@ -257,13 +257,13 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 
 	@Override
 	public void onError(Exception ex) {
-		setText("on error:" + ex.getMessage());
+		Toast.makeText(getApplicationContext(), "Tôi không nghe thấy gì !", Toast.LENGTH_LONG).show();
 		cancelProgress();
 	}
 
 	@Override
 	public void onTimeout() {
-		setText("on timeout \n");
+		Toast.makeText(getApplicationContext(), "Tôi không nghe thấy gì !", Toast.LENGTH_LONG).show();
 		cancelProgress();
 	}
 
@@ -298,7 +298,7 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 
 	@Override
 	public void onStopped() {
-		setText("On stopped");
+		Toast.makeText(getApplicationContext(), "Tôi nghỉ đây !", Toast.LENGTH_LONG).show();
 		cancelProgress();
 	}
 
