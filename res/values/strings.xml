@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="hello">Hello World, MessageActivity!</string>
+	<string name="app_name">team68</string>
+	<string name="hint">Nhập câu hỏi</string>
+	<string name="send">Gửi</string>
+	<string name="speak">voice</string>
+	<string name="reload">Thử lại</string>
+	<string name="start">Bắt đầu</string>
+	<string name="online_text">Robot đã online \n Nhấn bắt đầu để nói chuyện</string>
+	<string name="main_empty_list">There is no recent conversation, write new message
+		to start one.</string>
+
+</resources>

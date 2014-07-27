@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="8" >
+
+    <ImageView
+        android:id="@+id/imgStt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:padding="15dp"
+        android:layout_marginTop="5sp"
+        android:layout_weight="5"
+        android:contentDescription="@string/main_empty_list"
+        android:src="@drawable/online_robot" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1.5" >
+
+        <TextView
+            android:id="@+id/tvStt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15sp"
+            android:gravity="center"
+            android:text="@string/online_text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10sp"
+        android:layout_weight="1.5"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btnQuit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_margin="5sp"
+            android:background="@drawable/send_button"
+            android:contentDescription="@string/speak"
+            android:onClick="reloadActivity"
+            android:paddingBottom="5sp"
+            android:paddingLeft="15sp"
+         
+            android:paddingRight="15sp"
+            android:paddingTop="5sp"
+            android:text="@string/reload"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:layout_margin="5sp"
+            android:background="@drawable/send_button"
+            android:contentDescription="@string/speak"
+            android:onClick="startChat"
+            android:paddingBottom="5sp"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp"
+            android:paddingTop="5sp"
+            android:text="@string/start"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</LinearLayout>
