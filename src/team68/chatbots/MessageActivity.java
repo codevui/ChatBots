@@ -124,7 +124,7 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 		final Robot mRobot = getRobot();
 		if (mRobot == null) {
 			Toast.makeText(getApplicationContext(), "You have no Robot \n Click Search to find one", Toast.LENGTH_LONG).show();
-			scan();
+		
 		}
 		if (mRobot != null) {
 			if (text == null || TextUtils.isEmpty(text)) {
