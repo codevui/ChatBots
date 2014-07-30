@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.fpt.robot.Robot;
 import com.fpt.robot.RobotException;
 import com.fpt.robot.app.RobotActivity;
+import com.fpt.robot.motion.RobotGesture;
 import com.fpt.robot.tts.RobotTextToSpeech;
 import com.fpt.lib.asr.Alternative;
 import com.fpt.lib.asr.Languages;
@@ -145,6 +146,22 @@ public class MessageActivity extends RobotActivity implements SpeakToTextListene
 							// say text with VietNamese language
 							RobotTextToSpeech.say(mRobot, text,
 									RobotTextToSpeech.ROBOT_TTS_LANG_VI);
+						} catch (RobotException e) {
+							e.printStackTrace();
+						}
+
+					}
+				}).start();
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							// say text with VietNamese language
+							String[] list = RobotGesture.getGestureList(mRobot);
+							Random rand = new Random();
+							
+							RobotGesture.runGesture(mRobot, list[rand.nextInt(list.length-1)]);
+							
 						} catch (RobotException e) {
 							e.printStackTrace();
 						}
