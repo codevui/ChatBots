@@ -29,7 +29,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="team68.chatbots.MainActivity"
+            android:name="team68.chatbots.activity.MainActivity"
             android:configChanges="orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="team68.chatbots.MessageActivity"
+            android:name="team68.chatbots.activity.MessageActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" >
