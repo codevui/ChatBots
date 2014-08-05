@@ -61,7 +61,7 @@
 
         <meta-data
             android:name="robot_app_secret"
-            android:value="c5145108a9c10fb254adf0ca45c044bb" />
+            android:value="a1804b5fd7ae1154efbc534b83a8b5de" />
     </application>
 
 </manifest>
