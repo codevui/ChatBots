@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/title"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/btCourse"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:onClick="startCourse"
+        android:layout_height="wrap_content"
+        android:text="@string/btnCourse" />
+    <Button
+        android:id="@+id/btTest"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:onClick="startTest"
+        android:layout_height="wrap_content"
+        android:text="@string/btnTest" />
+    <Button
+        android:id="@+id/btAssist"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:onClick="startAssist"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAssistant" />
+    <Button
+        android:id="@+id/btQuit"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:onClick="quit"
+        android:layout_height="wrap_content"
+        android:text="@string/btnQuit" />
+
+</LinearLayout>

@@ -43,35 +43,46 @@ public final class R {
         public static final int speech_bubble_orange=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f090009;
-        public static final int bottom_write_bar=0x7f090000;
-        public static final int btnQuit=0x7f090006;
-        public static final int btnStart=0x7f090007;
-        public static final int imgStt=0x7f090004;
-        public static final int list=0x7f090003;
-        public static final int message_text=0x7f090008;
-        public static final int searchBtn=0x7f090002;
-        public static final int text=0x7f090001;
-        public static final int tvStt=0x7f090005;
+        public static final int action_settings=0x7f09000e;
+        public static final int bottom_write_bar=0x7f090005;
+        public static final int btAssist=0x7f090003;
+        public static final int btCourse=0x7f090001;
+        public static final int btQuit=0x7f090004;
+        public static final int btTest=0x7f090002;
+        public static final int btnQuit=0x7f09000b;
+        public static final int btnStart=0x7f09000c;
+        public static final int imgStt=0x7f090009;
+        public static final int list=0x7f090008;
+        public static final int message_text=0x7f09000d;
+        public static final int searchBtn=0x7f090007;
+        public static final int text=0x7f090006;
+        public static final int tvStt=0x7f09000a;
+        public static final int tvTitle=0x7f090000;
     }
     public static final class layout {
-        public static final int main=0x7f030000;
-        public static final int main_activity=0x7f030001;
-        public static final int sms_row=0x7f030002;
+        public static final int home_activity=0x7f030000;
+        public static final int main=0x7f030001;
+        public static final int main_activity=0x7f030002;
+        public static final int sms_row=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f080000;
     }
     public static final class string {
         public static final int app_name=0x7f060001;
+        public static final int btnAssistant=0x7f06000c;
+        public static final int btnCourse=0x7f06000a;
+        public static final int btnQuit=0x7f06000d;
+        public static final int btnTest=0x7f06000b;
         public static final int hello=0x7f060000;
         public static final int hint=0x7f060002;
-        public static final int main_empty_list=0x7f060008;
-        public static final int online_text=0x7f060007;
+        public static final int main_empty_list=0x7f060009;
+        public static final int online_text=0x7f060008;
         public static final int reload=0x7f060005;
         public static final int send=0x7f060003;
         public static final int speak=0x7f060004;
-        public static final int start=0x7f060006;
+        public static final int start=0x7f060007;
+        public static final int title=0x7f060006;
     }
     public static final class style {
         /** 
