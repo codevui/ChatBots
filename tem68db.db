@@ -1,0 +1,46 @@
+
+-- Table: Course
+CREATE TABLE Course ( 
+    id             INT             PRIMARY KEY
+                                   NOT NULL,
+    numberSlide    INT             NOT NULL,
+    numberQuestion INT             NOT NULL,
+    title          VARCHAR( 255 )  NOT NULL 
+);
+
+
+-- Table: Question
+CREATE TABLE Question ( 
+    id        INT             PRIMARY KEY
+                              NOT NULL,
+    id_course INT             NOT NULL
+                              REFERENCES Course,
+    type      INT             NOT NULL,
+    content   VARCHAR( 255 )  NOT NULL,
+    image     VARCHAR( 255 )  NOT NULL 
+);
+
+
+-- Table: Slide
+CREATE TABLE Slide ( 
+    id          INT              PRIMARY KEY
+                                 NOT NULL,
+    idCourse    INT              NOT NULL
+                                 REFERENCES Course,
+    [order]     INT              NOT NULL,
+    image       VARCHAR( 2000 )  NOT NULL,
+    textPreview VARCHAR( 2000 )  NOT NULL,
+    textToSay   VARCHAR( 2000 )  NOT NULL 
+);
+
+
+-- Table: PlanAnswer
+CREATE TABLE PlanAnswer ( 
+    id          INT             PRIMARY KEY
+                                NOT NULL,
+    id_question INT             NOT NULL
+                                REFERENCES Question,
+    content     VARCHAR( 255 )  NOT NULL,
+    isTrue      BOOLEAN         NOT NULL 
+);
+
