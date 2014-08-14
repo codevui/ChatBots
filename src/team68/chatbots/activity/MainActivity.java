@@ -26,7 +26,7 @@ public class MainActivity extends RobotActivity {
 		statusText = (TextView) findViewById(R.id.tvStt);
 		btnStartChat = (Button) findViewById(R.id.btnStart);
 		btnQuit = (Button) findViewById(R.id.btnQuit);
-
+		
 		if (Network.hasConnection(getApplicationContext())) {
 			statusImage.setImageResource(R.drawable.online_robot);
 			statusText.setText("Robot đã online \n Nhấn bắt đầu để nói chuyện");
@@ -45,7 +45,7 @@ public class MainActivity extends RobotActivity {
 	
 
 	public void startChat(View v) {
-		Intent intent = new Intent(this, MessageActivity.class);
+		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent);
 	}
 

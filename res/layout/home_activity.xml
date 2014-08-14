@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/title"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/btCourse"
@@ -18,12 +10,14 @@
         android:layout_marginTop="10dp"
         android:onClick="startCourse"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitle"
         android:text="@string/btnCourse" />
     <Button
         android:id="@+id/btTest"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:onClick="startTest"
+       android:layout_below="@+id/btCourse"
         android:layout_height="wrap_content"
         android:text="@string/btnTest" />
     <Button
@@ -31,14 +25,81 @@
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:onClick="startAssist"
+        android:layout_below="@+id/btTest"
         android:layout_height="wrap_content"
         android:text="@string/btnAssistant" />
+    <Button
+        android:id="@+id/btControll"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:onClick="startControll"
+        android:layout_below="@+id/btAssist"
+        android:layout_height="wrap_content"
+        android:text="@string/btnControll" />
+    <Button
+        android:id="@+id/btScan"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:onClick="startScan"
+        android:layout_below="@+id/btControll"
+        android:layout_height="wrap_content"
+        android:text="@string/btnScan" />
     <Button
         android:id="@+id/btQuit"
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
         android:onClick="quit"
         android:layout_height="wrap_content"
+       android:layout_below="@+id/btScan"
         android:text="@string/btnQuit" />
+    <RelativeLayout
+        android:id="@+id/layoutCommandFooter"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btnVoice"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/message_field"
+            android:descendantFocusability="beforeDescendants"
+            android:ems="10"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="25sp"
+            android:textStyle="bold" >
+
+            <requestFocus />
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/btnVoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:contentDescription="@string/speak"
+            android:src="@android:drawable/ic_btn_speak_now" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/title"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

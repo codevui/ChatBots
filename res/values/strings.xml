@@ -15,5 +15,15 @@
 	<string name="btnCourse">Khóa học luật (0%)</string>
 	<string name="btnTest">Kiểm tra kiến thức </string>
 	<string name="btnAssistant">Trợ lý luật </string>
+	<string name="btnControll">Test Robot </string>
 	<string name = "btnQuit"> Tạm biệt </string>
+	<string name = "btnScan"> Scan </string>
+	<string name = "learnCourse"> Học an toàn giao thông </string>
+	<string name = "learn0"> Học từ đầu </string>
+	<string name = "learnContinue"> Tiếp tục (60%)</string>
+	<string name = "listCourse"> Các bài học</string>
+	<string name = "next"> sau </string>
+	<string name = "prev"> trước </string>
+	<string name = "askQuestion"> câu hỏi ở đây ? </string>
+	
 </resources>

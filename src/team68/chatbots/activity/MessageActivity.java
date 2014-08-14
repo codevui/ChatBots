@@ -97,6 +97,7 @@ public class MessageActivity extends RobotActivity implements
 	}
 
 	public void scanRobot(View v) {
+		makeToast("Scan : Started");
 		scan();
 	}
 	public void subscribeEvent(){
@@ -115,6 +116,7 @@ public class MessageActivity extends RobotActivity implements
 		String newMessage = text.getText().toString().trim();
 		if (newMessage.length() > 0) {
 			text.setText("");
+			makeToast(newMessage);
 			addNewMessage(new Message(newMessage, true), false);
 			processText(newMessage);
 
@@ -122,39 +124,40 @@ public class MessageActivity extends RobotActivity implements
 	}
 
 	public void processText(String text) {
-
-		switch (text) {
-		case "ngồi xuống":
-			sitdown();
-			break;
-		case "đứng lên":
-			standup();
-			break;
-		case "quay sang trái":
-			turnLeft();
-			break;
-		case "quay sang phải":
-			turnRight();
-			break;
-		case "bước tới":
-			stepForward();
-			break;
-		case "bước lui":
-			stepBackward();
-			break;
-		case "dừng lại":
-			stopWalk();
-			break;
-		case "đăng ký":
-			subscribeEvent();
-			break;
-		case "chụp ảnh":
-			takePicture();
-			break;
-		default:
-			robotAnswer(text);
-
-		}
+		if (text.trim().equals(Defination.SITDOWN)) 
+				sitdown();
+//		switch (text) {
+//		case Defination.SITDOWN:
+//			sitdown();
+//			break;
+//		case "đứng lên":
+//			standup();
+//			break;
+//		case "quay sang trái":
+//			turnLeft();
+//			break;
+//		case "quay sang phải":
+//			turnRight();
+//			break;
+//		case "bước tới":
+//			stepForward();
+//			break;
+//		case "bước lui":
+//			stepBackward();
+//			break;
+//		case "dừng lại":
+//			stopWalk();
+//			break;
+//		case "đăng ký":
+//			subscribeEvent();
+//			break;
+//		case "chụp ảnh":
+//			takePicture();
+//			break;
+//		default:
+//			robotAnswer(text);
+//
+//		}
 	}
 
 	public void robotAnswer(String text) {
