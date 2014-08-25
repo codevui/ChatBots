@@ -5,6 +5,8 @@
 	<string name="app_name">team68</string>
 	<string name="hint">Nhập câu hỏi</string>
 	<string name="send">Gửi</string>
+		<string name="home">home</string>
+			<string name="scan">scan</string>
 	<string name="speak">voice</string>
 	<string name="reload">Thử lại</string>
 	<string name="title"> NAO - An toàn giao thông </string>

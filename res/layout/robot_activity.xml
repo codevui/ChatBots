@@ -4,40 +4,62 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btCourse"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitle"
-        android:layout_marginTop="10dp"
-        android:onClick="sitdown"
-        android:text="Ngồi xuống" />
-
-    <Button
-        android:id="@+id/btTest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btCourse"
-        android:layout_marginTop="10dp"
-        android:onClick="standup"
-        android:text="Đứng lên" />
-
-    <Button
-        android:id="@+id/btAssist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/btTest"
-        android:layout_marginTop="10dp"
-        android:onClick="takePicture"
-        android:text="Chụp ảnh" />
-
-    <ImageView
-        android:id="@+id/imgTakenPicture"
-        android:layout_width="match_parent"
-        android:src="@drawable/course1slide1"
-        android:layout_below="@+id/btAssist"
+        android:layout_height="match_parent"
         android:layout_above="@+id/layoutCommandFooter"
-        android:layout_height="60dp" />
+        android:layout_below="@+id/tvTitle" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="sitdown"
+                android:text="Ngồi xuống" />
+
+            <Button
+                android:id="@+id/btTest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="standup"
+                android:text="Đứng lên" />
+
+            <Button
+                android:id="@+id/btAssist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="takePicture"
+                android:text="Chụp ảnh" />
+
+            <ImageView
+                android:id="@+id/imgTakenPicture"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/course1slide1" />
+
+            <EditText
+                android:id="@+id/etBehavior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/message_field" />
+
+            <Button
+                android:id="@+id/btBehavior"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="doBehavior"
+                android:text="Do Behaviors" />
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:id="@+id/layoutCommandFooter"

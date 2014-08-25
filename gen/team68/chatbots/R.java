@@ -49,27 +49,42 @@ public final class R {
         public static final int speech_bubble_orange=0x7f02000d;
     }
     public static final class id {
-        public static final int action_settings=0x7f09001c;
+        public static final int ViewFlipper01=0x7f09001e;
+        public static final int action_settings=0x7f09002c;
         public static final int bottom_write_bar=0x7f09000f;
         public static final int btAssist=0x7f09000b;
+        public static final int btBehavior=0x7f090019;
         public static final int btControll=0x7f09000c;
         public static final int btCourse=0x7f090008;
         public static final int btQuit=0x7f09000e;
         public static final int btScan=0x7f09000d;
         public static final int btTest=0x7f09000a;
+        public static final int btnAB=0x7f090020;
+        public static final int btnCD=0x7f090021;
         public static final int btnQuit=0x7f090015;
-        public static final int btnSlide=0x7f090018;
+        public static final int btnSlide=0x7f09001a;
         public static final int btnStart=0x7f090016;
         public static final int btnVoice=0x7f090007;
         public static final int continueLearn=0x7f090002;
+        public static final int etBehavior=0x7f090018;
         public static final int etText=0x7f090006;
-        public static final int imgSlide=0x7f090019;
+        public static final int home=0x7f09002e;
+        public static final int imgSlide=0x7f09001b;
         public static final int imgStt=0x7f090013;
         public static final int imgTakenPicture=0x7f090017;
         public static final int layoutCommandFooter=0x7f090005;
         public static final int list=0x7f090012;
         public static final int listCourse=0x7f090004;
-        public static final int message_text=0x7f09001b;
+        public static final int message_text=0x7f09001d;
+        public static final int planA1=0x7f090022;
+        public static final int planA2=0x7f090028;
+        public static final int planB1=0x7f090023;
+        public static final int planB2=0x7f090029;
+        public static final int planC1=0x7f090024;
+        public static final int planC2=0x7f09002a;
+        public static final int planD1=0x7f090025;
+        public static final int planD2=0x7f09002b;
+        public static final int scan=0x7f09002d;
         public static final int searchBtn=0x7f090011;
         public static final int startLearn=0x7f090000;
         public static final int text=0x7f090010;
@@ -77,7 +92,10 @@ public final class R {
         public static final int textView2=0x7f090001;
         public static final int tvStt=0x7f090014;
         public static final int tvTitle=0x7f090009;
-        public static final int txSlide=0x7f09001a;
+        public static final int txSlide=0x7f09001c;
+        public static final int txSlide2=0x7f090027;
+        public static final int view1=0x7f09001f;
+        public static final int view2=0x7f090026;
     }
     public static final class layout {
         public static final int course_activity=0x7f030000;
@@ -91,31 +109,34 @@ public final class R {
     }
     public static final class menu {
         public static final int main=0x7f080000;
+        public static final int options_menu=0x7f080001;
     }
     public static final class string {
         public static final int app_name=0x7f060001;
-        public static final int askQuestion=0x7f060016;
-        public static final int btnAssistant=0x7f06000c;
-        public static final int btnControll=0x7f06000d;
-        public static final int btnCourse=0x7f06000a;
-        public static final int btnQuit=0x7f06000e;
-        public static final int btnScan=0x7f06000f;
-        public static final int btnTest=0x7f06000b;
+        public static final int askQuestion=0x7f060018;
+        public static final int btnAssistant=0x7f06000e;
+        public static final int btnControll=0x7f06000f;
+        public static final int btnCourse=0x7f06000c;
+        public static final int btnQuit=0x7f060010;
+        public static final int btnScan=0x7f060011;
+        public static final int btnTest=0x7f06000d;
         public static final int hello=0x7f060000;
         public static final int hint=0x7f060002;
-        public static final int learn0=0x7f060011;
-        public static final int learnContinue=0x7f060012;
-        public static final int learnCourse=0x7f060010;
-        public static final int listCourse=0x7f060013;
-        public static final int main_empty_list=0x7f060009;
-        public static final int next=0x7f060014;
-        public static final int online_text=0x7f060008;
-        public static final int prev=0x7f060015;
-        public static final int reload=0x7f060005;
+        public static final int home=0x7f060004;
+        public static final int learn0=0x7f060013;
+        public static final int learnContinue=0x7f060014;
+        public static final int learnCourse=0x7f060012;
+        public static final int listCourse=0x7f060015;
+        public static final int main_empty_list=0x7f06000b;
+        public static final int next=0x7f060016;
+        public static final int online_text=0x7f06000a;
+        public static final int prev=0x7f060017;
+        public static final int reload=0x7f060007;
+        public static final int scan=0x7f060005;
         public static final int send=0x7f060003;
-        public static final int speak=0x7f060004;
-        public static final int start=0x7f060007;
-        public static final int title=0x7f060006;
+        public static final int speak=0x7f060006;
+        public static final int start=0x7f060009;
+        public static final int title=0x7f060008;
     }
     public static final class style {
         /** 

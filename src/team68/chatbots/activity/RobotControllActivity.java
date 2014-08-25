@@ -3,16 +3,22 @@ package team68.chatbots.activity;
 import team68.chatbots.R;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fpt.robot.RobotException;
 import com.fpt.robot.app.RobotActivity;
+import com.fpt.robot.behavior.RobotBehavior;
 import com.fpt.robot.motion.RobotMotionAction;
 import com.fpt.robot.motion.RobotMotionStiffnessController;
 import com.fpt.robot.motion.RobotPosture;
@@ -24,14 +30,40 @@ public class RobotControllActivity extends RobotActivity {
 	private RobotCamera[] mCamera = new RobotCamera[2];
 	int selectedCameraIndex = 1;
 	ImageView ivTakenPicture;
-
+	EditText etBehavior;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.robot_activity);
 		context = getApplicationContext();
 		ivTakenPicture = (ImageView) findViewById(R.id.imgTakenPicture);
+		etBehavior = (EditText) findViewById(R.id.etBehavior);
 
+	}
+
+	public void doBehavior(View v) {
+		final String behaviorName = etBehavior.getText().toString();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (getRobot() == null) {
+					makeToast("Please connect with robot first");
+				} else {
+					showProgress("running behavior [" + behaviorName + "]...");
+					try {
+						// Run behavior with name is behaviorName on robot
+						RobotBehavior.runBehavior(getRobot(), behaviorName);
+					} catch (final RobotException e) {
+						e.printStackTrace();
+						cancelProgress();
+						makeToast("run behavior [" + behaviorName
+								+ "] failed! " + e.getMessage());
+						return;
+					}
+					cancelProgress();
+				}
+			}
+		}).start();
 	}
 
 	public void sitdown(View v) {
@@ -167,6 +199,7 @@ public class RobotControllActivity extends RobotActivity {
 			}
 		}).start();
 	}
+
 	public void displayPicture(final String picture) {
 		final String picturePath = picture;
 		// decode to bitmap
@@ -182,6 +215,7 @@ public class RobotControllActivity extends RobotActivity {
 			makeToast("Picture saved to " + picturePath + "!");
 		}
 	}
+
 	public void makeToast(final String m) {
 		runOnUiThread(new Runnable() {
 			@Override
@@ -228,6 +262,33 @@ public class RobotControllActivity extends RobotActivity {
 				}
 			}
 		});
+	}
+
+	public void goHome() {
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.scan:
+			scan();
+			return true;
+		case R.id.home:
+			goHome();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 }

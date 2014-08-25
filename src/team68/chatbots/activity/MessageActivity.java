@@ -19,6 +19,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.speech.RecognizerIntent;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -819,5 +822,28 @@ public class MessageActivity extends RobotActivity implements
 			}
 		}).start();
 	}
-
+	public void goHome(){
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.options_menu, menu);
+	    return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.scan:
+	            scan();
+	            return true;
+	        case R.id.home:
+	            goHome();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
 }
