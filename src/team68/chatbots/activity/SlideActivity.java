@@ -1,8 +1,14 @@
 package team68.chatbots.activity;
 
+import java.util.List;
 import java.util.Random;
 
 import team68.chatbots.R;
+import team68.chatbots.model.dao.db.CourseDb;
+import team68.chatbots.model.dao.db.SlideDb;
+import team68.chatbots.model.entity.Course;
+import team68.chatbots.model.entity.Slide;
+import team68.chatbots.model.sqlite.SlideDbSqlite;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +31,10 @@ public class SlideActivity extends RobotActivity {
 	private int courseId;
 	private int slideId;
 	private int numberSlide;
+	CourseDb coursedb;
+	SlideDb slideDb;
+	Course course;
+	List<Slide> listSlide;
 	private String[] listDetailSlide = {
 			"Xin chào ! Tôi là NAO",
 			"Hôm nay, tớ sẽ giới thiệu cho bạn \n về đèn giao thông",
@@ -56,17 +66,21 @@ public class SlideActivity extends RobotActivity {
 		numberSlide = 7;
 		courseId = 1;
 		context = getApplicationContext();
-		setContentSlide(1);
+		SlideDbSqlite slidesql = new SlideDbSqlite(context);
+		listSlide = slidesql.getListSlide();
+		setContentSlide(0);
+		
 	}
 	
 	public void setContentSlide(int id){
-		slideId = id;
-		String imgName = "course" + courseId + "slide" + id;
+		Slide slide = listSlide.get(id);
+		String imgName = slide.getImage();
 		int imgId = getResources().getIdentifier(imgName, "drawable", getPackageName());
 		imgSlide.setImageResource(imgId);
-		txSlide.setText(listDetailSlide[id]);
 		
-		robotTalk(listPresentSlide[id]);
+		txSlide.setText(slide.getTextPreview());
+		
+		robotTalk(slide.getTextToSay());
 		
 		
 	}

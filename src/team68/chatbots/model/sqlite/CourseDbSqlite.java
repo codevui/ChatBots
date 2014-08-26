@@ -3,14 +3,13 @@ package team68.chatbots.model.sqlite;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.database.sqlite.SQLiteOpenHelper;
 import team68.chatbots.controller.LogUtil;
 import team68.chatbots.model.dao.db.CourseDb;
 import team68.chatbots.model.entity.Course;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 public class CourseDbSqlite extends SQLiteOpenHelper implements CourseDb {
 	// ten CSDL

@@ -1,6 +1,8 @@
 package team68.chatbots.activity;
 
 import team68.chatbots.R;
+import team68.chatbots.model.dao.db.CourseDb;
+import team68.chatbots.model.entity.Course;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +19,7 @@ public class CourseActivity extends RobotActivity {
 
 	ListView listCourse;
 	ArrayAdapter<String> adapter;
+	
 	String[] values = new String[] { "Bài 1 : Phương tiện giao thông",
 			"Bài 2 : Đèn báo hiệu", "Bài 3 : Biển báo hiệu",
 			"Bài 4 : Đi sang đường", "Bài 5 : Ngồi xe máy an toàn",
@@ -38,6 +41,7 @@ public class CourseActivity extends RobotActivity {
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, android.R.id.text1, values);
 		listCourse.setAdapter(adapter);
+		
 	}
 	public void startLearn(View v){
 		Intent intentSlide = new Intent(getApplicationContext(),SlideActivity.class);

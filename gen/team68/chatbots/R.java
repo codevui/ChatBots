@@ -33,20 +33,28 @@ public final class R {
         public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int course1slide1=0x7f020000;
-        public static final int course1slide2=0x7f020001;
-        public static final int course1slide3=0x7f020002;
-        public static final int course1slide4=0x7f020003;
-        public static final int course1slide5=0x7f020004;
-        public static final int course1slide6=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int message_bar=0x7f020007;
-        public static final int message_field=0x7f020008;
-        public static final int offline_robot=0x7f020009;
-        public static final int online_robot=0x7f02000a;
-        public static final int send_button=0x7f02000b;
-        public static final int speech_bubble_green=0x7f02000c;
-        public static final int speech_bubble_orange=0x7f02000d;
+        public static final int chim1=0x7f020000;
+        public static final int course1slide1=0x7f020001;
+        public static final int course1slide2=0x7f020002;
+        public static final int course1slide3=0x7f020003;
+        public static final int course1slide4=0x7f020004;
+        public static final int course1slide5=0x7f020005;
+        public static final int course1slide6=0x7f020006;
+        public static final int databasedemo=0x7f020007;
+        public static final int den1=0x7f020008;
+        public static final int dendo1=0x7f020009;
+        public static final int dentinhieu=0x7f02000a;
+        public static final int denvang1=0x7f02000b;
+        public static final int denxanh1=0x7f02000c;
+        public static final int ic_launcher=0x7f02000d;
+        public static final int message_bar=0x7f02000e;
+        public static final int message_field=0x7f02000f;
+        public static final int offline_robot=0x7f020010;
+        public static final int online_robot=0x7f020011;
+        public static final int oto1=0x7f020012;
+        public static final int send_button=0x7f020013;
+        public static final int speech_bubble_green=0x7f020014;
+        public static final int speech_bubble_orange=0x7f020015;
     }
     public static final class id {
         public static final int ViewFlipper01=0x7f09001e;
