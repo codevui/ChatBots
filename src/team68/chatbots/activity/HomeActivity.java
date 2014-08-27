@@ -21,7 +21,8 @@ public class HomeActivity extends RobotActivity {
 	}
 
 	public void startTest(View v) {
-
+		Intent intent = new Intent(this, TestActivity.class);
+		startActivity(intent);
 	}
 
 	public void startScan(View v) {

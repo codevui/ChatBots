@@ -17,18 +17,18 @@ public class CourseDbSqlite extends SQLiteOpenHelper implements CourseDb {
 	// phien ban cua CSDL
 	private static final int DB_VERSION = 1;
 	private static final String LOG = "CourseDbSqlite";
-
-	public CourseDbSqlite(Context context) {
+	SQLiteDatabase myDatabase;
+	public CourseDbSqlite(Context context, SQLiteDatabase database) {
 		super(context, DB_NAME, null, DB_VERSION);
+		myDatabase = database;
 	}
 
 	@Override
 	public Course getById(int id) {
-		// TODO Auto-generated method stub
-		SQLiteDatabase database = this.getReadableDatabase();
+		
 		String sql = "SELECT * FROM Course WHERE id = " + id;
 		LogUtil.LogD(LOG, sql);
-		Cursor cur = database.rawQuery(sql, null);
+		Cursor cur = myDatabase.rawQuery(sql, null);
 		
 		if (cur != null){
 			cur.moveToFirst();
@@ -45,21 +45,20 @@ public class CourseDbSqlite extends SQLiteOpenHelper implements CourseDb {
 	@Override
 	public List<Course> getListCourse() {
 		List<Course> listCourse = new ArrayList<Course>();
-		SQLiteDatabase database = this.getReadableDatabase();
 		String sql = "SELECT * FROM Course";
 		
 		LogUtil.LogD(LOG, sql);
 		
-		Cursor c = database.rawQuery(sql, null);
+		Cursor c = myDatabase.rawQuery(sql, null);
 		
 		if (c != null){
 			c.moveToFirst();
 			do{
 				Course course = new Course();
-				course.setId(c.getInt(1));
-				course.setNumberSlide(c.getInt(2));
-				course.setNumberQuestion(c.getInt(3));
-				course.setTitle(c.getString(4));
+				course.setId(c.getInt(c.getColumnIndex("id")));
+				course.setNumberSlide(c.getInt(c.getColumnIndex("numberSlide")));
+				course.setNumberQuestion(c.getInt(c.getColumnIndex("numberQuestion")));
+				course.setTitle(c.getString(c.getColumnIndex("title")));
 				listCourse.add(course);
 			} while (c.moveToNext());
 		}

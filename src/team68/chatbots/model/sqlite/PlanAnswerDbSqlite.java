@@ -37,10 +37,10 @@ public class PlanAnswerDbSqlite extends SQLiteOpenHelper implements PlanAnswerDb
 			cur.moveToFirst();
 		}
 		PlanAnswer planAnswer = new PlanAnswer();
-		planAnswer.setId(cur.getInt(1));
-		planAnswer.setIdQuestion(cur.getInt(2));
-		planAnswer.setContent(cur.getString(3));
-		planAnswer.setIsTrue(cur.getInt(4) == 1);
+		planAnswer.setId(cur.getInt(cur.getColumnIndex("id")));
+		planAnswer.setIdQuestion(cur.getInt(cur.getColumnIndex("id_question")));
+		planAnswer.setContent(cur.getString(cur.getColumnIndex("content")));
+		planAnswer.setIsTrue(cur.getInt(cur.getColumnIndex("isTrue")) == 1);
 		
 		
 		return planAnswer;

@@ -36,11 +36,11 @@ public class QuestionDbSqlite extends SQLiteOpenHelper implements QuestionDb {
 			cur.moveToFirst();
 		}
 		Question question = new Question();
-		question.setId(cur.getInt(1));
-		question.setId_course(cur.getInt(2));
-		question.setType(cur.getInt(3));
-		question.setContent(cur.getString(4));
-		question.setImage(cur.getString(5));
+		question.setId(cur.getInt(cur.getColumnIndex("id")));
+		question.setId_course(cur.getInt(cur.getColumnIndex("id_course")));
+		question.setType(cur.getInt(cur.getColumnIndex("type")));
+		question.setContent(cur.getString(cur.getColumnIndex("content")));
+		question.setImage(cur.getString(cur.getColumnIndex("image")));
 		
 		return question;
 	}
@@ -59,11 +59,11 @@ public class QuestionDbSqlite extends SQLiteOpenHelper implements QuestionDb {
 			cur.moveToFirst();
 			do{
 				Question question = new Question();
-				question.setId(cur.getInt(1));
-				question.setId_course(cur.getInt(2));
-				question.setType(cur.getInt(3));
-				question.setContent(cur.getString(4));
-				question.setImage(cur.getString(5));
+				question.setId(cur.getInt(cur.getColumnIndex("id")));
+				question.setId_course(cur.getInt(cur.getColumnIndex("id_course")));
+				question.setType(cur.getInt(cur.getColumnIndex("type")));
+				question.setContent(cur.getString(cur.getColumnIndex("content")));
+				question.setImage(cur.getString(cur.getColumnIndex("image")));
 				listQuestion.add(question);
 			} while (cur.moveToNext());
 		}

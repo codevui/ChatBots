@@ -1,16 +1,18 @@
 package team68.chatbots.activity;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
 import team68.chatbots.R;
 import team68.chatbots.model.dao.db.CourseDb;
 import team68.chatbots.model.dao.db.SlideDb;
-import team68.chatbots.model.entity.Course;
 import team68.chatbots.model.entity.Slide;
+import team68.chatbots.model.sqlite.DatabaseHelper;
 import team68.chatbots.model.sqlite.SlideDbSqlite;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -33,26 +35,10 @@ public class SlideActivity extends RobotActivity {
 	private int numberSlide;
 	CourseDb coursedb;
 	SlideDb slideDb;
-	Course course;
 	List<Slide> listSlide;
-	private String[] listDetailSlide = {
-			"Xin chào ! Tôi là NAO",
-			"Hôm nay, tớ sẽ giới thiệu cho bạn \n về đèn giao thông",
-			"Đèn giao thông được dựng ở ngã tư đường",
-			"Đèn có 3 màu : xanh , đỏ , vàng , sáng lần lượt",
-			"Đèn xanh, xe cộ được phép đi",
-			"Đèn đỏ , xe cộ phải dừng lại",
-			"Đèn vàng , xe cộ giảm tốc độ",
-	};
-	private String[] listPresentSlide=  {
-			"Xin chào ! Tôi là NAO",
-			"Hôm nay, tớ sẽ giới thiệu cho bạn \n về đèn giao thông",
-			"Đèn giao thông được dựng ở ngã tư đường",
-			"Đèn có 3 màu : xanh , đỏ , vàng , sáng lần lượt",
-			"Đèn xanh, xe cộ được phép đi",
-			"Đèn đỏ , xe cộ phải dừng lại",
-			"Đèn vàng , xe cộ giảm tốc độ",
-	};
+	DatabaseHelper myDbHelper;
+	SQLiteDatabase myDatabase;
+	
 	static Random rand = new Random();
 	ImageView imgSlide;
 	TextView txSlide;
@@ -63,12 +49,25 @@ public class SlideActivity extends RobotActivity {
 		setContentView(R.layout.slide_activity);
 		imgSlide = (ImageView) findViewById(R.id.imgSlide);
 		txSlide = (TextView) findViewById(R.id.txSlide);
-		numberSlide = 7;
-		courseId = 1;
+		
+		Bundle bundle = getIntent().getExtras();
+		
+		courseId = bundle.getInt("CourseId");
+		numberSlide = bundle.getInt("NumberSlide");
+		
 		context = getApplicationContext();
-		SlideDbSqlite slidesql = new SlideDbSqlite(context);
+		myDbHelper = new DatabaseHelper(context);
+		try {
+			myDbHelper.createDatabase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		myDbHelper.openDatabase();
+		myDatabase = myDbHelper.getMyDatabase();
+		SlideDbSqlite slidesql = new SlideDbSqlite(context,myDatabase);
 		listSlide = slidesql.getListSlide();
-		setContentSlide(0);
+		setContentSlide(1);
 		
 	}
 	
@@ -81,7 +80,7 @@ public class SlideActivity extends RobotActivity {
 		txSlide.setText(slide.getTextPreview());
 		
 		robotTalk(slide.getTextToSay());
-		
+		slideId = id;
 		
 	}
 	
@@ -164,7 +163,7 @@ public class SlideActivity extends RobotActivity {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				Toast.makeText(context, m, Toast.LENGTH_LONG).show();
+				Toast.makeText(context, m, Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
