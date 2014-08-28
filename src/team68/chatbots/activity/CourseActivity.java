@@ -83,10 +83,7 @@ public class CourseActivity extends RobotActivity implements OnItemClickListener
 	public void resetCourse(View V) {
 		
 	}
-	public void goHome(){
-		Intent intent = new Intent(this, HomeActivity.class);
-		startActivity(intent);
-	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    MenuInflater inflater = getMenuInflater();
@@ -106,6 +103,10 @@ public class CourseActivity extends RobotActivity implements OnItemClickListener
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	public void goHome(){
+		Intent intent = new Intent(this, HomeActivity.class);
+		startActivity(intent);
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
