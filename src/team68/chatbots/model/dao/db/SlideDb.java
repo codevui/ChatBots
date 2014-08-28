@@ -6,7 +6,7 @@ import team68.chatbots.model.entity.Slide;
 
 public interface SlideDb {
 	Slide getById(int id);
-	List<Slide> getSlideByCourseId();
+	List<Slide> getSlideByCourseId(int id);
 	List<Slide> getListSlide();
 
 }

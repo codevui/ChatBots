@@ -89,6 +89,13 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             >
         </activity>
+         <activity
+            android:name="team68.chatbots.activity.ImageRecognize"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            >
+        </activity>
 
         <service
             android:name="com.fpt.robot.core.http.service.RobotHttpService"

@@ -68,7 +68,7 @@ public class SlideDbSqlite extends SQLiteOpenHelper implements SlideDb {
 				Slide slide = new Slide();
 				slide.setId(cur.getInt(cur.getColumnIndex("id")));
 				slide.setIdCourse(cur.getInt(cur.getColumnIndex("idCourse")));
-				slide.setOrder(cur.getInt(cur.getColumnIndex("order")));
+				slide.setOrder(cur.getInt(cur.getColumnIndex("stt")));
 				slide.setImage(cur.getString(cur.getColumnIndex("image")));
 				slide.setTextPreview(cur.getString(cur.getColumnIndex("textPreview")));
 				slide.setTextToSay(cur.getString(cur.getColumnIndex("textToSay")));
@@ -76,6 +76,35 @@ public class SlideDbSqlite extends SQLiteOpenHelper implements SlideDb {
 			} while (cur.moveToNext());
 		}
 		return listSlide;
+	}
+	@Override
+	public List<Slide> getSlideByCourseId(int id) {
+		List<Slide> listSlide = new ArrayList<Slide>();
+		String sql = "SELECT * FROM Slide WHERE idCourse = " + id + " ORDER BY stt";
+		
+		LogUtil.LogD(LOG, sql);
+		Cursor cur = null;
+		try{
+			cur = myDatabase.rawQuery(sql, null);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		if (cur != null){
+			cur.moveToFirst();
+			do{
+				Slide slide = new Slide();
+				slide.setId(cur.getInt(cur.getColumnIndex("id")));
+				slide.setIdCourse(cur.getInt(cur.getColumnIndex("idCourse")));
+				slide.setOrder(cur.getInt(cur.getColumnIndex("stt")));
+				slide.setImage(cur.getString(cur.getColumnIndex("image")));
+				slide.setTextPreview(cur.getString(cur.getColumnIndex("textPreview")));
+				slide.setTextToSay(cur.getString(cur.getColumnIndex("textToSay")));
+				listSlide.add(slide);
+			} while (cur.moveToNext());
+		}
+		return listSlide;
+	
 	}
 
 	@Override
@@ -90,10 +119,6 @@ public class SlideDbSqlite extends SQLiteOpenHelper implements SlideDb {
 		
 	}
 
-	@Override
-	public List<Slide> getSlideByCourseId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

@@ -66,8 +66,8 @@ public class SlideActivity extends RobotActivity {
 		myDbHelper.openDatabase();
 		myDatabase = myDbHelper.getMyDatabase();
 		SlideDbSqlite slidesql = new SlideDbSqlite(context,myDatabase);
-		listSlide = slidesql.getListSlide();
-		setContentSlide(1);
+		listSlide = slidesql.getSlideByCourseId(courseId);
+		setContentSlide(0);
 		
 	}
 	

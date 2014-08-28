@@ -2,7 +2,6 @@ package team68.chatbots.activity;
 
 import java.io.IOException;
 import java.util.List;
-
 import team68.chatbots.R;
 import team68.chatbots.model.entity.Course;
 import team68.chatbots.model.sqlite.CourseDbSqlite;
@@ -51,6 +50,7 @@ public class CourseActivity extends RobotActivity implements OnItemClickListener
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, android.R.id.text1, values);
 		listCourse.setAdapter(adapter);
+		
 		
 	}
 	

@@ -98,7 +98,11 @@ public class MessageActivity extends RobotActivity implements
 				RobotCamera.CAMERA_BOTTOM);
 		
 	}
-
+	
+	public void startScan(View v) {
+		Intent intentImageReg = new Intent(getApplicationContext(),ImageRecognize.class);
+		startActivity(intentImageReg);
+	}
 	public void scanRobot(View v) {
 		makeToast("Scan : Started");
 		scan();
