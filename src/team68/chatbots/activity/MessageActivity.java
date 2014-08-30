@@ -87,7 +87,6 @@ public class MessageActivity extends RobotActivity implements
 		listView.setAdapter(adapter);
 
 		stt = new SpeakToText(Languages.VIETNAMESE, this);
-		stt.setApiKey("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw");
 		robotController = new RobotController(this);
 		defination = new Defination();
 		
@@ -101,7 +100,7 @@ public class MessageActivity extends RobotActivity implements
 	}
 	
 	public void startScan(View v) {
-		Intent intentImageReg = new Intent(getApplicationContext(),SignsActivity.class);
+		Intent intentImageReg = new Intent(getApplicationContext(),ImageRecognize.class);
 		startActivity(intentImageReg);
 	}
 	public void scanRobot(View v) {
@@ -134,38 +133,38 @@ public class MessageActivity extends RobotActivity implements
 	public void processText(String text) {
 		if (text.trim().equals(Defination.SITDOWN)) 
 				sitdown();
-		switch (text) {
-		case Defination.SITDOWN:
-			sitdown();
-			break;
-		case "đứng lên":
-			standup();
-			break;
-		case "quay sang trái":
-			turnLeft();
-			break;
-		case "quay sang phải":
-			turnRight();
-			break;
-		case "bước tới":
-			stepForward();
-			break;
-		case "bước lui":
-			stepBackward();
-			break;
-		case "dừng lại":
-			stopWalk();
-			break;
-		case "đăng ký":
-			subscribeEvent();
-			break;
-		case "chụp ảnh":
-			takePicture();
-			break;
-		default:
-			robotAnswer(text);
-
-		}
+//		switch (text) {
+//		case Defination.SITDOWN:
+//			sitdown();
+//			break;
+//		case "đứng lên":
+//			standup();
+//			break;
+//		case "quay sang trái":
+//			turnLeft();
+//			break;
+//		case "quay sang phải":
+//			turnRight();
+//			break;
+//		case "bước tới":
+//			stepForward();
+//			break;
+//		case "bước lui":
+//			stepBackward();
+//			break;
+//		case "dừng lại":
+//			stopWalk();
+//			break;
+//		case "đăng ký":
+//			subscribeEvent();
+//			break;
+//		case "chụp ảnh":
+//			takePicture();
+//			break;
+//		default:
+//			robotAnswer(text);
+//
+//		}
 	}
 
 	public void robotAnswer(String text) {
@@ -292,6 +291,20 @@ public class MessageActivity extends RobotActivity implements
 		 * Convert voice to text
 		 */
 		if (Network.hasConnection(getApplicationContext())) {
+			// // Intent intent = new
+			// Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+			// // intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+			// // RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
+			// try {
+			// // startActivityForResult(intent, RESULT_SPEECH);
+			//
+			// } catch (ActivityNotFoundException a) {
+			// Toast t = Toast.makeText(getApplicationContext(),
+			// "Oops! Your device doesn't support Speech to Text",
+			// Toast.LENGTH_SHORT);
+			// t.show();
+			// }
+
 			/*
 			 * Using Fpt speaktotext
 			 */
