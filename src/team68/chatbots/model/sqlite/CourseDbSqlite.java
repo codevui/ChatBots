@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CourseDbSqlite extends SQLiteOpenHelper implements CourseDb {
 	// ten CSDL
-	private static final String DB_NAME = "team68.db";
+	private static final String DB_NAME = "team68v8.db";
 	// phien ban cua CSDL
 	private static final int DB_VERSION = 1;
 	private static final String LOG = "CourseDbSqlite";

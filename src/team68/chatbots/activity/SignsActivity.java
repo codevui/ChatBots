@@ -6,30 +6,40 @@ import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.util.Random;
 
 import team68.chatbots.R;
+import team68.chatbots.model.entity.Signs;
+import team68.chatbots.model.sqlite.DatabaseHelper;
+import team68.chatbots.model.sqlite.SignsDbSqlite;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fpt.robot.Robot;
 import com.fpt.robot.RobotException;
 import com.fpt.robot.app.RobotActivity;
+import com.fpt.robot.motion.RobotGesture;
+import com.fpt.robot.tts.RobotTextToSpeech;
 import com.fpt.robot.vision.RobotCamera;
 import com.fpt.robot.vision.RobotCameraPreview;
 import com.fpt.robot.vision.RobotCameraPreviewView;
 
-public class ImageRecognize extends RobotActivity {
+public class SignsActivity extends RobotActivity {
 	
 	private EditText ipAddr;
 	private Button bConnect;
@@ -40,30 +50,43 @@ public class ImageRecognize extends RobotActivity {
 	private boolean SET_PICTURE_FILE_NAME = true;
 	private RobotCamera[] mCamera = new RobotCamera[2];
 	int selectedCameraIndex = 1;
+	static Random rand = new Random();
 	Context context;
 	String idImageResponse;
 	boolean isFinish;
 	Message m = new Message();
 	protected static final int MSG_ID = 0x1337;
 	private Button btnImageScan;
+	DatabaseHelper myDbHelper;
+	SQLiteDatabase myDatabase;
+	ImageView imgImageScan;
+	SignsDbSqlite sSql;
+	TextView stt;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.image_activity);
-		bConnect=(Button)findViewById(R.id.bConnect);
 		ipAddr = (EditText)findViewById(R.id.ipAddr);
-		bConnect.setEnabled(true);
-		mCameraPreview = (RobotCameraPreviewView) findViewById(R.id.cameraPreview);
 		context = getApplicationContext();
 		btnImageScan = (Button) findViewById(R.id.btnImageScan);
-		btnImageScan.setEnabled(false);
+		imgImageScan = (ImageView) findViewById(R.id.imgImageScan);
+		myDbHelper = new DatabaseHelper(context);
+		try {
+			myDbHelper.createDatabase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		myDbHelper.openDatabase();
+		myDatabase = myDbHelper.getMyDatabase();
+		sSql = new SignsDbSqlite(context,myDatabase);
+		stt = (TextView) findViewById(R.id.tvImg);
 	}
 	
 	
 	public void imageScanI(View v){
-		ipAddress = "10.3.9.106";
+		ipAddress = ipAddr.getText().toString();
 		final String filename = "picture.bmp";
-		bConnect.setEnabled(false);
 		new Thread(new Runnable() {
 			
 			@Override
@@ -97,7 +120,8 @@ public class ImageRecognize extends RobotActivity {
 					ByteBuffer bufer = ByteBuffer.allocate(1024);
 					int numRead = socketChannel.read(bufer);
 					idImageResponse = new String(bufer.array(), 0, numRead);
-					
+					int id = Integer.parseInt(idImageResponse);
+					displaySignInfo(id);
 					socketChannel.finishConnect();
 					makeToast(idImageResponse);
 				} catch (IOException e) {
@@ -169,7 +193,6 @@ public class ImageRecognize extends RobotActivity {
 			}
 		}).start();
 	}
-
 	public void displayPicture(final String picture) {
 		final String picturePath = picture;
 		// decode to bitmap
@@ -178,13 +201,31 @@ public class ImageRecognize extends RobotActivity {
 			runOnUiThread(new Runnable() {
 				public void run() {
 					// display image to image view
-					btnImageScan.setEnabled(true);
+					imgImageScan.setImageBitmap(bm);
 				}
 			});
 		} else {
 			makeToast("Picture saved to " + picturePath + "!");
 		}
-	}	
+	}
+	public void displaySignInfo(final int id) {
+		
+		// decode to bitmap
+			runOnUiThread(new Runnable() {
+				public void run() {
+					if (id == 0) {
+						stt.setText("Không nhận ra biển báo");
+					} else {
+						Signs s = sSql.getById(id);
+						stt.setText(s.getTitle());
+						robotTalk(s.getText());
+					}
+					
+					
+				}
+			});
+	}
+		
 	public void startPreview(View v){
 		// get robot camera preview
 				if (getRobot() == null) {
@@ -250,14 +291,7 @@ public class ImageRecognize extends RobotActivity {
 			}
 		}).start();
 	}
-	public void makeToast(final String m) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(context, m, Toast.LENGTH_LONG).show();
-			}
-		});
-	}
+	
 
 	private ProgressDialog progressDialog = null;
 
@@ -267,7 +301,7 @@ public class ImageRecognize extends RobotActivity {
 			public void run() {
 				if (progressDialog == null) {
 					progressDialog = new ProgressDialog(
-							ImageRecognize.this);
+							SignsActivity.this);
 				}
 				// no title
 				if (message != null) {
@@ -316,5 +350,76 @@ public class ImageRecognize extends RobotActivity {
 		startActivity(intent);
 	}
 
+	void robotTalk(String s) {
+		final String text = s;
+		final Robot mRobot = getRobot();
+		if (mRobot == null) {
+			Toast.makeText(getApplicationContext(),
+					"You have no Robot \n Click Search to find one",
+					Toast.LENGTH_LONG).show();
 
+		}
+		if (mRobot != null) {
+			if (text == null || TextUtils.isEmpty(text)) {
+				runOnUiThread(new Runnable() {
+
+					@Override
+					public void run() {
+						Toast.makeText(SignsActivity.this, "Text is empty",
+								Toast.LENGTH_LONG).show();
+					}
+				});
+			} else {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							// say text with VietNamese language
+							RobotTextToSpeech.say(mRobot, text,
+									RobotTextToSpeech.ROBOT_TTS_LANG_VI);
+						} catch (RobotException e) {
+							e.printStackTrace();
+						}
+
+					}
+				}).start();
+				handMotionBehavior("random");
+			}
+		}
+	}
+	public void handMotionBehavior(final String type) {
+		final Robot mRobot = getRobot();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					
+					String[] list = RobotGesture.getGestureList(mRobot);
+					makeToast(list.toString());
+					switch (type) {
+					case "random":
+						int i = rand.nextInt(10) + 1;
+
+						RobotGesture.runGesture(mRobot, "HandMotionBehavior"
+								+ i);
+
+						break;
+					default:
+						break;
+
+					}
+				} catch (RobotException e) {
+					e.printStackTrace();
+				}
+			}
+		}).start();
+	}
+	public void makeToast(final String m) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(context, m, Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 }

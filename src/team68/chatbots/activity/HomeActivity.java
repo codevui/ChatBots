@@ -22,6 +22,7 @@ public class HomeActivity extends RobotActivity {
 
 	public void startTest(View v) {
 		Intent intent = new Intent(this, TestActivity.class);
+		intent.putExtra("CourseId", -1);
 		startActivity(intent);
 	}
 
