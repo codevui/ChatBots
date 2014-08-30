@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SlideDbSqlite extends SQLiteOpenHelper implements SlideDb {
 	// ten CSDL
-	private static final String DB_NAME = "team68v8.db";
+	private static final String DB_NAME = "team68.db";
 	// phien ban cua CSDL
 	private static final int DB_VERSION = 2;
 	private static final String LOG = "SlideDbSqlite";

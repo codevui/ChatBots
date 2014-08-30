@@ -9,26 +9,6 @@
     android:layout_height="wrap_content"
     android:weightSum="10"
     android:orientation="vertical" >
-    <ImageView
-	    android:id="@+id/imgImageScan"
-	    android:layout_width="match_parent"
-	    android:layout_height="320dp" 
-	    android:src="@drawable/cotden"
-	    />
-	<TextView
-	    android:id="@+id/tvImg"
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-		android:gravity="center"
-		android:textSize="20sp"
-	    >
-	    
-	</TextView>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="takePicture"
-        android:text="Chụp Ảnh" />
     
     <LinearLayout 
         android:layout_width="match_parent"
@@ -48,7 +28,65 @@
             android:text="192.168."
             
             />
-    </LinearLayout>        
+    </LinearLayout>
+	<Button 
+	    android:id="@+id/bConnect"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/btnConnect"
+	    android:onClick="connectServer"
+	    />
+	<LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+      
+            <Button
+                android:id="@+id/btStartCameraPreview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="startPreview"
+                android:text="Start Preview" />
+            
+            <Button
+                android:id="@+id/btStopCameraPreview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:onClick="stopPreview"
+                android:text="Stop Preview" />
+      
+        </LinearLayout>
+        
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            
+            <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+      
+	           
+	            
+	            <com.fpt.robot.vision.RobotCameraPreviewView
+			         android:id="@+id/cameraPreview"
+			         android:layout_width="240dp"
+			         android:layout_height="160dp"
+			         android:layout_weight="1"
+			         android:gravity="center"/>
+      
+            </LinearLayout>
+            
+            </ScrollView>
+    <Button 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Chụp đi"
+	    android:onClick="takePicture"
+	    />        
 	<Button 
 	    android:id="@+id/btnImageScan"
 	    android:layout_width="match_parent"
@@ -56,6 +94,11 @@
 	    android:text="@string/btnImageScan"
 	    android:onClick="imageScanI"
 	    />
-	
+	<ImageView
+	    android:id="@+id/imgImageScan"
+	    android:layout_width="match_parent"
+	    android:layout_height="320dp" 
+	    android:src="@drawable/cotden"
+	    />
 </LinearLayout>
 </ScrollView>

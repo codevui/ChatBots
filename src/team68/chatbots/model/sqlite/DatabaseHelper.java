@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-	private static final String DB_NAME = "team68v8.db";
+	private static final String DB_NAME = "team68.db";
 	private String DB_PATH;
 	private final Context myContext;
 	private SQLiteDatabase myDatabase;
@@ -32,8 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void createDatabase () throws IOException {
 		boolean dbExist = checkDatabase();
 		if (dbExist) {
-			this.getReadableDatabase();
-			copyDatabase();
+			
 		} else {
 			this.getReadableDatabase();
 			copyDatabase();

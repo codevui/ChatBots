@@ -7,5 +7,5 @@ import team68.chatbots.model.entity.PlanAnswer;
 public interface PlanAnswerDb {
 	PlanAnswer getById(int id);
 	List<PlanAnswer> getListAnswer();
-	List<PlanAnswer> getAnswerByQuestionId(int id);
+
 }

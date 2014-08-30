@@ -11,7 +11,7 @@
 	<string name="reload">Thử lại</string>
 	<string name="title"> NAO - An toàn giao thông </string>
 	<string name="start">Bắt đầu</string>
-	<string name="online_text">NAO đã sẵn sàng \n Nhấn bắt đầu để sử dụng</string>
+	<string name="online_text">Robot đã online \n Nhấn bắt đầu để nói chuyện</string>
 	<string name="main_empty_list">There is no recent conversation, write new message
 		to start one.</string>
 	<string name="btnCourse">Khóa học luật (0%)</string>
@@ -24,7 +24,7 @@
 	<string name = "btnScan"> Scan </string>
 	<string name = "learnCourse"> Học an toàn giao thông </string>
 	<string name = "learn0"> Học từ đầu </string>
-	<string name = "learnContinue"> Tiếp tục</string>
+	<string name = "learnContinue"> Tiếp tục (60%)</string>
 	<string name = "listCourse"> Các bài học</string>
 	<string name = "next"> sau </string>
 	<string name = "prev"> trước </string>

@@ -77,13 +77,11 @@
             android:paddingLeft="15sp"
             android:paddingRight="15sp"
             android:paddingTop="5sp"
-            android:visibility="gone"
             android:src="@android:drawable/ic_search_category_default"
             android:textColor="#FFF" />
         <Button 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/send_button"
             android:text="@string/btnImageScan"
             android:onClick="startScan"
             />

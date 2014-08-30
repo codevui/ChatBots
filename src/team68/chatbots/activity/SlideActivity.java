@@ -5,20 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import team68.chatbots.R;
-import team68.chatbots.controller.NLPCenter;
-import team68.chatbots.controller.Network;
 import team68.chatbots.model.dao.db.CourseDb;
 import team68.chatbots.model.dao.db.SlideDb;
 import team68.chatbots.model.entity.Slide;
 import team68.chatbots.model.sqlite.DatabaseHelper;
 import team68.chatbots.model.sqlite.SlideDbSqlite;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,19 +23,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fpt.lib.asr.Alternative;
-import com.fpt.lib.asr.Languages;
-import com.fpt.lib.asr.Result;
-import com.fpt.lib.asr.SpeakToText;
-import com.fpt.lib.asr.SpeakToTextListener;
-import com.fpt.lib.asr.Transcript;
 import com.fpt.robot.Robot;
 import com.fpt.robot.RobotException;
 import com.fpt.robot.app.RobotActivity;
 import com.fpt.robot.motion.RobotGesture;
 import com.fpt.robot.tts.RobotTextToSpeech;
 
-public class SlideActivity extends RobotActivity implements SpeakToTextListener{
+public class SlideActivity extends RobotActivity {
 	private int courseId;
 	private int slideId;
 	private int numberSlide;
@@ -51,12 +38,11 @@ public class SlideActivity extends RobotActivity implements SpeakToTextListener{
 	List<Slide> listSlide;
 	DatabaseHelper myDbHelper;
 	SQLiteDatabase myDatabase;
-	SpeakToText stt;
+	
 	static Random rand = new Random();
 	ImageView imgSlide;
 	TextView txSlide;
 	Context context;
-	NLPCenter nlpCenter;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,12 +67,8 @@ public class SlideActivity extends RobotActivity implements SpeakToTextListener{
 		myDatabase = myDbHelper.getMyDatabase();
 		SlideDbSqlite slidesql = new SlideDbSqlite(context,myDatabase);
 		listSlide = slidesql.getSlideByCourseId(courseId);
-		myDatabase.close();
 		setContentSlide(0);
-		storeData();
-		stt = new SpeakToText(Languages.VIETNAMESE, this);
-		stt.setApiKey("AIzaSyBOti4mM-6x9WDnZIjIeyEU21OpBXqWBgw");
-		nlpCenter = new NLPCenter(context,this);
+		
 	}
 	
 	public void setContentSlide(int id){
@@ -103,18 +85,13 @@ public class SlideActivity extends RobotActivity implements SpeakToTextListener{
 	}
 	
 	public void nextSlide(View v){
-		if (slideId < numberSlide-1) {
+		if (slideId < numberSlide) {
 			setContentSlide(slideId + 1);
-		}
-		else {
-			Intent intent = new Intent(this, TestActivity.class);
-			intent.putExtra("CourseId", courseId);
-			startActivity(intent);
 		}
 		
 	}
 	public void prevSlide(View v){
-		if (slideId > 0){
+		if (slideId > 1){
 			setContentSlide(slideId -1);
 		}
 	}
@@ -182,7 +159,14 @@ public class SlideActivity extends RobotActivity implements SpeakToTextListener{
 			}
 		}).start();
 	}
-
+	public void makeToast(final String m) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(context, m, Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
 	public void goHome(){
 		Intent intent = new Intent(this, HomeActivity.class);
 		startActivity(intent);
@@ -206,140 +190,5 @@ public class SlideActivity extends RobotActivity implements SpeakToTextListener{
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
-	}
-	public void storeData(){
-		SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
-		Editor editor = pref.edit();
-		editor.putInt("CourseId", courseId);
-		editor.commit();
-	}
-public void voiceTextSlide(View v){
-		
-		if (Network.hasConnection(getApplicationContext())) {
-			//Using FPT ASR
-			new Thread(new Runnable() {
-
-				@Override
-				public void run() {
-					stt.recognize(1000, 5000);
-				}
-
-			}).start();
-		} else {
-			lostInternet();
-		}
-	}
-	@Override
-	public void onProcessing() {
-		showProgress("Đang xử lý...");
-
-	}
-
-	@Override
-	public void onResult(Result result) {
-		if (result != null) {
-			Alternative[] res = result.result.clone();
-			Transcript[] tra = res[0].alternative.clone();
-			String text = tra[0].transcript;
-
-			if (text == null | text.equals(""))
-				makeToast("Tôi không nghe thấy gì !"); 
-			else {
-				nlpCenter.solveText(text);
-			}
-			cancelProgress();
-		} else {
-		}
-
-	}
-
-	public void lostInternet() {
-		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-		builder1.setTitle("Mất kết nối");
-		builder1.setMessage("Vui lòng kết nối internet để tiếp tục trò chuyện");
-		builder1.setCancelable(true);
-		builder1.setNeutralButton(android.R.string.ok,
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-
-		AlertDialog alert11 = builder1.create();
-		alert11.show();
-	}
-
-	private ProgressDialog progressDialog = null;
-
-	protected void showProgress(final String message) {
-		// Log.d(TAG, "showProgress('" +message+ "')");
-		runOnUiThread(new Runnable() {
-			public void run() {
-				if (progressDialog == null) {
-					progressDialog = new ProgressDialog(SlideActivity.this);
-				}
-				// no title
-				if (message != null) {
-					progressDialog.setMessage(message);
-				}
-				progressDialog.setIndeterminate(true);
-				progressDialog.setCancelable(true);
-				progressDialog.show();
-			}
-		});
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected void cancelProgress() {
-		// Log.d(TAG, "cancelProgress()");
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				if (progressDialog != null) {
-					// progressDialog.cancel();
-					progressDialog.dismiss();
-				}
-			}
-		});
-	}
-
-	@Override
-	public void onWaiting() {
-		showProgress("Waiting sound...");
-	}
-
-	@Override
-	public void onRecording() {
-		showProgress("Đang lưu...");
-	}
-
-	@Override
-	public void onError(Exception ex) {
-		makeToast("Tôi không nghe thấy gì !");
-		cancelProgress();
-	}
-
-	@Override
-	public void onTimeout() {
-		makeToast("Tôi không nghe thấy gì !");
-		cancelProgress();
-	}
-
-	@Override
-	public void onStopped() {
-		makeToast("Tôi nghỉ đây !");
-		cancelProgress();
-	}
-	public void makeToast(final String m) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(context, m, Toast.LENGTH_LONG).show();
-			}
-		});
 	}
 }
