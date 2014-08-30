@@ -75,6 +75,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:background="@null"
+            android:onClick="voiceTextCourse"
             android:contentDescription="@string/speak"
             android:src="@android:drawable/ic_btn_speak_now" />
 
